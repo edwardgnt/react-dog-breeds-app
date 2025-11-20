@@ -47,3 +47,28 @@ src/
   main.jsx                  # Entry point, wraps App with ThemeProvider + context
   index.css                 # Global base styles
   
+  ---
+
+  ⚙️ Getting Started (Local Development)
+
+1. Clone the repo
+    git clone https://github.com/edwardgnt/react-dog-breeds-app.git
+    cd react-dog-breeds-app
+
+2. Install dependencies
+    npm install
+
+3. Run the dev server
+    npm run dev
+
+4. Build for production
+    npm run build
+
+---
+
+Data Fetching
+    GET https://dogapi.dog/api/v2/breeds
+
+
+    
+
