@@ -1,5 +1,17 @@
 import { useEffect, useState, useMemo, useContext } from "react";
-import { Box, Typography, TextField, IconButton, Tooltip } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  IconButton,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Stack,
+} from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
@@ -12,8 +24,18 @@ function DogBreeds() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
+  const [selectedBreed, setSelectedBreed] = useState<Breed | null>(null);
+  const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
   const { mode, toggleColorMode } = useContext(ColorModeContext);
+
+  const handleRowClick = (breed: Breed) => {
+    setSelectedBreed(breed);
+    setDetailsOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setDetailsOpen(false);
+  };
 
   useEffect(() => {
     const fetchBreeds = async () => {
@@ -111,7 +133,58 @@ function DogBreeds() {
         />
       </Box>
 
-      <DogBreedsTable breeds={filteredBreeds} />
+      <DogBreedsTable breeds={filteredBreeds} onRowClick={handleRowClick} />
+
+      <Dialog
+        open={detailsOpen}
+        onClose={handleCloseDetails}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogTitle>
+          {selectedBreed?.attributes.name ?? "Breed Details"}
+        </DialogTitle>
+        <DialogContent dividers>
+          {selectedBreed && (
+            <Stack spacing={1.5}>
+              {selectedBreed.attributes.description && (
+                <Typography variant="body2">
+                  {selectedBreed.attributes.description}
+                </Typography>
+              )}
+
+              <Typography variant="body2">
+                <strong>Life span:</strong>{" "}
+                {selectedBreed.attributes.life
+                  ? `${selectedBreed.attributes.life.min}–${selectedBreed.attributes.life.max} years`
+                  : "Unknown"}
+              </Typography>
+
+              <Typography variant="body2">
+                <strong>Male weight:</strong>{" "}
+                {selectedBreed.attributes.male_weight
+                  ? `${selectedBreed.attributes.male_weight.min}–${selectedBreed.attributes.male_weight.max} kg`
+                  : "—"}
+              </Typography>
+
+              <Typography variant="body2">
+                <strong>Female weight:</strong>{" "}
+                {selectedBreed.attributes.female_weight
+                  ? `${selectedBreed.attributes.female_weight.min}–${selectedBreed.attributes.female_weight.max} kg`
+                  : "—"}
+              </Typography>
+
+              <Typography variant="body2">
+                <strong>Hypoallergenic:</strong>{" "}
+                {selectedBreed.attributes.hypoallergenic ? "Yes" : "No"}
+              </Typography>
+            </Stack>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDetails}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
