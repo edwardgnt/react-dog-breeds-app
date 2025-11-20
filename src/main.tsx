@@ -1,20 +1,20 @@
 import { StrictMode, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
+import App from "./App";
 
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { getTheme } from "./theme";
-import { ColorModeContext } from "./ColorModeContext";
+import { ColorModeContext, ColorMode } from "./ColorModeContext";
 
 function Root() {
-  const [mode, setMode] = useState("dark"); // default theme
+  const [mode, setMode] = useState<ColorMode>("dark");
 
   const colorMode = useMemo(
     () => ({
       mode,
       toggleColorMode: () => {
-        setMode((prev) => (prev === "light" ? "dark" : "light"));
+        setMode((prev) => (prev === "light" ? "dark" : "dark"));
       },
     }),
     [mode]
@@ -34,6 +34,6 @@ function Root() {
   );
 }
 
-createRoot(document.getElementById("root")).render(<Root />);
+createRoot(document.getElementById("root") as HTMLElement).render(<Root />);
 
 export default Root;

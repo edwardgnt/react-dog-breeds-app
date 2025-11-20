@@ -5,12 +5,13 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 import DogBreedsTable from "../components/DogBreedsTable";
 import { ColorModeContext } from "../ColorModeContext";
+import type { Breed } from "../types/dogApi";
 
 function DogBreeds() {
-  const [breeds, setBreeds] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [breeds, setBreeds] = useState<Breed[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const { mode, toggleColorMode } = useContext(ColorModeContext);
 
@@ -20,17 +21,18 @@ function DogBreeds() {
         setLoading(true);
         setError(null);
 
-        // Public endpoint for sample data.
         const response = await fetch("https://dogapi.dog/api/v2/breeds");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const json = await response.json();
-        setBreeds(json.data || []);
+        const json = (await response.json()) as { data: Breed[] };
+        setBreeds(json.data ?? []);
       } catch (err) {
-        setError(err.message || "Failed to load breeds");
+        const message =
+          err instanceof Error ? err.message : "Failed to load breeds";
+        setError(message);
       } finally {
         setLoading(false);
       }
@@ -39,8 +41,8 @@ function DogBreeds() {
     fetchBreeds();
   }, []);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   const filteredBreeds = useMemo(() => {
@@ -48,7 +50,7 @@ function DogBreeds() {
     if (!term) return breeds;
 
     return breeds.filter((breed) => {
-      const name = breed.attributes?.name || "";
+      const name = breed.attributes?.name ?? "";
       return name.toLowerCase().includes(term);
     });
   }, [breeds, searchTerm]);
