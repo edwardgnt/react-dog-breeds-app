@@ -53,6 +53,7 @@ src/
 
 1. Clone the repo
     git clone https://github.com/edwardgnt/react-dog-breeds-app.git
+    <br />
     cd react-dog-breeds-app
 
 2. Install dependencies
