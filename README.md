@@ -1,4 +1,4 @@
-# React Dog Breeds App 🐶
+# React Dog Breeds App 
 
 A small but polished React application that lets you browse dog breeds using a public API, with a clean Material UI data grid, search filtering, and a light/dark theme toggle.
 
