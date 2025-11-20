@@ -47,7 +47,7 @@ src/
   main.jsx                  # Entry point, wraps App with ThemeProvider + context
   index.css                 # Global base styles
   
-  ---
+```
 
   ⚙️ Getting Started (Local Development)
 
