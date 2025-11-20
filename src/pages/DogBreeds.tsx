@@ -34,7 +34,7 @@ function DogBreeds() {
     setSelectedBreed(breed);
     setDetailsOpen(true);
 
-    // fetch image
+    // fetch random image for the breed
     const name = breed.attributes.name;
     const urlName = breedNameToUrl(name);
 

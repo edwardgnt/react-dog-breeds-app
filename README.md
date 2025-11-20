@@ -46,16 +46,21 @@ Built with **React + Vite + MUI (Material UI)** and deployed on **Vercel**.
 ## 🗂 Project Structure
 
 ```text
-src/
-  components/
-    DogBreedsTable.jsx      # Reusable DataGrid for displaying breeds
-  pages/
-    DogBreeds.jsx           # Main page: fetches data, search, and layout
-  ColorModeContext.js       # Context for light/dark theme toggle
-  theme.js                  # getTheme(mode) - MUI theme configuration
-  App.jsx                   # App root, renders DogBreeds page
-  main.jsx                  # Entry point, wraps App with ThemeProvider + context
-  index.css                 # Global base styles
+
+📁 src
+├── 📁 components
+│   └── 📄 DogBreedsTable.tsx        # Reusable MUI DataGrid for breed listing
+├── 📁 pages
+│   └── 📄 DogBreeds.tsx             # Main page: fetch, search, modal, image loading
+├── 📁 utils
+│   └── 📄 breedNameToUrl.ts         # Normalizes breed names for dog.ceo API
+├── 📁 context
+│   └── 📄 ColorModeContext.tsx      # Light/Dark theme context + toggle
+├── 📁 theme
+│   └── 📄 theme.ts                  # getTheme(mode) → MUI Theme configuration
+├── 📄 App.tsx                       # App root component
+├── 📄 main.tsx                      # Entry point: wraps app with providers + ThemeProvider
+└── 📄 index.css                     # Base global styles
   
 ```
 
