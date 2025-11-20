@@ -1,6 +1,6 @@
 # React Dog Breeds App 
 
-# React Dog Breeds App 🐶
+# React Dog Breeds App 
 
 [![CI](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml/badge.svg)](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml)
 [![Deploy](https://img.shields.io/badge/Vercel-Deployed-brightgreen?logo=vercel)](https://react-dog-breeds-app.vercel.app/)
@@ -9,7 +9,6 @@
 ![Vite](https://img.shields.io/badge/Vite-Fast-purple?logo=vite)
 [![Dog API](https://img.shields.io/badge/API-DogAPI-orange)](https://dogapi.dog/)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
 
 
 
