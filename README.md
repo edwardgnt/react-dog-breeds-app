@@ -9,7 +9,6 @@ Built with **React + Vite + MUI (Material UI)** and deployed on **Vercel**.
 ## 🚀 Live Demo
 
 👉 **Live app:** https://react-dog-breeds-app.vercel.app
-_(Replace this after deploying to Vercel.)_
 
 ---
 
