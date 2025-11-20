@@ -1,16 +1,49 @@
-# React + Vite
+# React Dog Breeds App 🐶
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small but polished React application that lets you browse dog breeds using a public API, with a clean Material UI data grid, search filtering, and a light/dark theme toggle.
 
-Currently, two official plugins are available:
+Built with **React + Vite + MUI (Material UI)** and deployed on **Vercel**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+👉 **Live app:** https://react-dog-breeds-app.vercel.app
+_(Replace this after deploying to Vercel.)_
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🔄 Fetches real dog breed data from the public [Dog API](https://dogapi.dog/api/v2/breeds)
+- 📊 Displays data in a **Material UI DataGrid**
+- 🔍 **Search by breed name** with instant client-side filtering
+- 🌗 **Light / Dark mode toggle** using MUI theming + React Context
+- 🎯 Clean separation of **pages** and **components**
+- 📱 Responsive layout with full-width table and modern styling
+
+---
+
+## 🧱 Tech Stack
+
+- [React](https://react.dev/) (via [Vite](https://vitejs.dev/))
+- [Material UI (MUI)](https://mui.com/)
+- [MUI X Data Grid](https://mui.com/x/react-data-grid/)
+- [Dog API](https://dogapi.dog/) – public dog breeds API
+
+---
+
+## 🗂 Project Structure
+
+```text
+src/
+  components/
+    DogBreedsTable.jsx      # Reusable DataGrid for displaying breeds
+  pages/
+    DogBreeds.jsx           # Main page: fetches data, search, and layout
+  ColorModeContext.js       # Context for light/dark theme toggle
+  theme.js                  # getTheme(mode) - MUI theme configuration
+  App.jsx                   # App root, renders DogBreeds page
+  main.jsx                  # Entry point, wraps App with ThemeProvider + context
+  index.css                 # Global base styles
+  
