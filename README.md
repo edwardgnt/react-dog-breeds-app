@@ -1,5 +1,8 @@
 # React Dog Breeds App 
 
+[![CI](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml/badge.svg)](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml)
+
+
 A small but polished React application that lets you browse dog breeds using a public API, with a clean Material UI data grid, search filtering, and a light/dark theme toggle.
 
 Built with **React + Vite + MUI (Material UI)** and deployed on **Vercel**.
