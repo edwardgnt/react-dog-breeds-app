@@ -14,7 +14,8 @@ function Root() {
     () => ({
       mode,
       toggleColorMode: () => {
-        setMode((prev) => (prev === "light" ? "dark" : "dark"));
+        // fix this:
+        setMode((prev) => (prev === "light" ? "dark" : "light"));
       },
     }),
     [mode]

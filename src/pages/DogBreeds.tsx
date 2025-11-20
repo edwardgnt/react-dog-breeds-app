@@ -18,6 +18,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DogBreedsTable from "../components/DogBreedsTable";
 import { ColorModeContext } from "../ColorModeContext";
 import type { Breed } from "../types/dogApi";
+import { breedNameToUrl } from "../utils/breedNameToUrl";
 
 function DogBreeds() {
   const [breeds, setBreeds] = useState<Breed[]>([]);
@@ -27,10 +28,30 @@ function DogBreeds() {
   const [selectedBreed, setSelectedBreed] = useState<Breed | null>(null);
   const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
   const { mode, toggleColorMode } = useContext(ColorModeContext);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const handleRowClick = (breed: Breed) => {
+  const handleRowClick = async (breed: Breed) => {
     setSelectedBreed(breed);
     setDetailsOpen(true);
+
+    // fetch image
+    const name = breed.attributes.name;
+    const urlName = breedNameToUrl(name);
+
+    try {
+      // Fetch images
+      const response = await fetch(
+        `https://dog.ceo/api/breed/${urlName}/images/random`
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        setImageUrl(data.message);
+      } else {
+        setImageUrl(null);
+      }
+    } catch {
+      setImageUrl(null);
+    }
   };
 
   const handleCloseDetails = () => {
@@ -145,6 +166,27 @@ function DogBreeds() {
           {selectedBreed?.attributes.name ?? "Breed Details"}
         </DialogTitle>
         <DialogContent dividers>
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={selectedBreed?.attributes.name}
+              style={{
+                width: "100%",
+                maxHeight: 250,
+                objectFit: "cover",
+                borderRadius: 8,
+                marginBottom: 16,
+              }}
+            />
+          )}
+
+          {!imageUrl && (
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              (Image not available)
+            </Typography>
+          )}
+
+          {/* Description + Details */}
           {selectedBreed && (
             <Stack spacing={1.5}>
               {selectedBreed.attributes.description && (
@@ -158,25 +200,6 @@ function DogBreeds() {
                 {selectedBreed.attributes.life
                   ? `${selectedBreed.attributes.life.min}–${selectedBreed.attributes.life.max} years`
                   : "Unknown"}
-              </Typography>
-
-              <Typography variant="body2">
-                <strong>Male weight:</strong>{" "}
-                {selectedBreed.attributes.male_weight
-                  ? `${selectedBreed.attributes.male_weight.min}–${selectedBreed.attributes.male_weight.max} kg`
-                  : "—"}
-              </Typography>
-
-              <Typography variant="body2">
-                <strong>Female weight:</strong>{" "}
-                {selectedBreed.attributes.female_weight
-                  ? `${selectedBreed.attributes.female_weight.min}–${selectedBreed.attributes.female_weight.max} kg`
-                  : "—"}
-              </Typography>
-
-              <Typography variant="body2">
-                <strong>Hypoallergenic:</strong>{" "}
-                {selectedBreed.attributes.hypoallergenic ? "Yes" : "No"}
               </Typography>
             </Stack>
           )}
