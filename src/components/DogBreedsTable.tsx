@@ -1,8 +1,13 @@
-import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  type GridColDef,
+  type GridRowParams,
+} from "@mui/x-data-grid";
 import type { Breed } from "../types/dogApi";
 
 interface DogBreedsTableProps {
   breeds: Breed[];
+  onRowClick?: (breed: Breed) => void;
 }
 
 interface BreedRow {
@@ -14,7 +19,10 @@ interface BreedRow {
   hypoallergenic: string;
 }
 
-const DogBreedsTable: React.FC<DogBreedsTableProps> = ({ breeds }) => {
+const DogBreedsTable: React.FC<DogBreedsTableProps> = ({
+  breeds,
+  onRowClick,
+}) => {
   const rows: BreedRow[] = breeds.map((breed) => {
     const attrs = breed.attributes;
     const life = attrs.life;
@@ -39,6 +47,15 @@ const DogBreedsTable: React.FC<DogBreedsTableProps> = ({ breeds }) => {
     { field: "hypoallergenic", headerName: "Hypoallergenic", width: 150 },
   ];
 
+  const handleRowClick = (params: GridRowParams<BreedRow>) => {
+    if (!onRowClick) return;
+
+    const breed = breeds.find((b) => b.id === params.id);
+    if (breed) {
+      onRowClick(breed);
+    }
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <div style={{ height: 600, width: "100%" }}>
@@ -49,6 +66,8 @@ const DogBreedsTable: React.FC<DogBreedsTableProps> = ({ breeds }) => {
           initialState={{
             pagination: { paginationModel: { pageSize: 10, page: 0 } },
           }}
+          onRowClick={handleRowClick}
+          sx={{ "& .MuiDataGrid-row:hover": { cursor: "pointer" } }}
         />
       </div>
     </div>
