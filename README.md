@@ -1,7 +1,5 @@
 # React Dog Breeds App 
 
-# React Dog Breeds App 
-
 [![CI](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml/badge.svg)](https://github.com/edwardgnt/react-dog-breeds-app/actions/workflows/ci.yml)
 [![Deploy](https://img.shields.io/badge/Vercel-Deployed-brightgreen?logo=vercel)](https://react-dog-breeds-app.vercel.app/)
 ![Made with React](https://img.shields.io/badge/React-2025-blue?logo=react)
