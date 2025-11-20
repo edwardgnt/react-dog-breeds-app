@@ -23,9 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
-
-      # If/when you add tests, you can enable this:
-      # - name: Run tests
-      #   run: npm test
